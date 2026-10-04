@@ -41,3 +41,8 @@ npm run preview
 5. Configure deployment and a custom domain.
 
 The site is intentionally dependency-light so the content and commerce direction can be finalized without reworking the foundation.
+
+
+## Reference prototype
+
+The supplied standalone concept is preserved at `reference/easy-chanaa-prototype.html` for direct comparison and future integration.
