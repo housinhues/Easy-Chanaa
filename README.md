@@ -27,7 +27,7 @@ npm run preview
 ## Current starter sections
 
 - Hero / brand introduction
-- First-drop product grid using the approved black, red, and white cap imagery
+- First-drop product grid led by the Football Style Cap from the latest Instagram post
 - Brand story section
 - Email signup placeholder
 - Footer with contact and social placeholders
@@ -41,6 +41,8 @@ npm run preview
 5. Configure deployment and a custom domain.
 
 The site is intentionally dependency-light so the content and commerce direction can be finalized without reworking the foundation.
+
+The first product image is stored at `public/assets/football-style-cap.jpg` and was pulled from the latest approved post on [@easychanaa](https://www.instagram.com/p/DeE51kHkcXN/).
 
 
 ## Reference prototype

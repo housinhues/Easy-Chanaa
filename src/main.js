@@ -1,9 +1,9 @@
 import './style.css'
 
 const products = [
-  { name: 'Easy Chanaa Cap / Black', image: '/assets/black_cap_instagram_4x5.png', tone: '01' },
-  { name: 'Easy Chanaa Cap / Red', image: '/assets/red_cap_instagram_4x5.png', tone: '02' },
-  { name: 'Easy Chanaa Cap / White', image: '/assets/white_cap_instagram_4x5.png', tone: '03' },
+  { name: 'Football Style Cap', image: '/assets/football-style-cap.jpg', tone: '01' },
+  { name: 'Easy Chanaa Cap / Black', image: '/assets/black_cap_instagram_4x5.png', tone: '02' },
+  { name: 'Easy Chanaa Cap / Red', image: '/assets/red_cap_instagram_4x5.png', tone: '03' },
 ]
 
 document.querySelector('#app').innerHTML = `
