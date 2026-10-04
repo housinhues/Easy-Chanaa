@@ -1,9 +1,9 @@
 import './style.css'
 
 const products = [
-  { name: 'Black / Everyday', image: '/assets/black_cap_instagram_4x5.png', tone: '01' },
-  { name: 'Red / Signal', image: '/assets/red_cap_instagram_4x5.png', tone: '02' },
-  { name: 'White / Clean', image: '/assets/white_cap_instagram_4x5.png', tone: '03' },
+  { name: 'Easy Chanaa Cap / Black', image: '/assets/black_cap_instagram_4x5.png', tone: '01' },
+  { name: 'Easy Chanaa Cap / Red', image: '/assets/red_cap_instagram_4x5.png', tone: '02' },
+  { name: 'Easy Chanaa Cap / White', image: '/assets/white_cap_instagram_4x5.png', tone: '03' },
 ]
 
 document.querySelector('#app').innerHTML = `
