@@ -1,50 +1,5 @@
-# Easy Chanaa — Official Website
+# Easy Chanaa
 
-A lightweight, responsive starter for the official Easy Chanaa clothing brand website.
+Single-file website. Edit the `CONFIG` block at the top of the script in `index.html` (WhatsApp number, pieces, prices, photos, shops). Images live in `assets/`. Pushing to `main` publishes to GitHub Pages.
 
-## Local development
-
-```bash
-npm install
-npm run dev
-```
-
-Create a production build with:
-
-```bash
-npm run build
-npm run preview
-```
-
-## Project structure
-
-- `index.html` — document shell and metadata
-- `src/main.js` — initial page content and product data
-- `src/style.css` — brand styling and responsive layout
-- `public/assets/` — approved campaign imagery copied from the legacy archive
-- `LEGACY-ASSETS.md` — source notes for the campaign assets
-
-## Current starter sections
-
-- Hero / brand introduction
-- First-drop product grid led by the Football Style Cap from the latest Instagram post
-- Brand story section
-- Email signup placeholder
-- Footer with contact and social placeholders
-
-## Before launch
-
-1. Replace placeholder links with the final storefront, Instagram, legal, and support URLs.
-2. Connect the signup form to the chosen email provider.
-3. Confirm product names, pricing, inventory, shipping, returns, and legal copy.
-4. Add final favicon and social preview artwork.
-5. Configure deployment and a custom domain.
-
-The site is intentionally dependency-light so the content and commerce direction can be finalized without reworking the foundation.
-
-The first product image is stored at `public/assets/football-style-cap.jpg` and was pulled from the latest approved post on [@easychanaa](https://www.instagram.com/p/DeE51kHkcXN/).
-
-
-## Reference prototype
-
-The supplied standalone concept is preserved at `reference/easy-chanaa-prototype.html` for direct comparison and future integration.
+Set a price with `price: 350` (blank/`null` shows "Ask for price").
