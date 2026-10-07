@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Easy Chanaa</title>
+<meta name="description" content="Easy Chanaa clothing. See the pieces worn, then order on WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<style>
+:root{
+  --bg:#EDEFEA; --fg:#14201B; --muted:#55615B; --line:#CBD1CA; --tile:#DDE2DB;
+  --accent:#2438C8; --accent-fg:#FFFFFF; --focus:#2438C8;
+  --font:"Archivo","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#101612; --fg:#E9EEE8; --muted:#A3AFA8; --line:#2B3630; --tile:#1B2420;
+  --accent:#8EA0FF; --accent-fg:#0B1033; --focus:#8EA0FF; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101612; --fg:#E9EEE8; --muted:#A3AFA8; --line:#2B3630; --tile:#1B2420;
+  --accent:#8EA0FF; --accent-fg:#0B1033; --focus:#8EA0FF; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{color-scheme:light dark;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);font-size:16px;line-height:1.5;padding-inline:16px;padding-block:0}
+.wrap{max-width:1080px;margin-inline:auto}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.02}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:9}
+
+/* Display type — Archivo Expanded */
+.display{font-stretch:125%;letter-spacing:-.03em;font-weight:900;line-height:.98}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.reveal.is-visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+}
+
+header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);z-index:5}
+.mark{font-stretch:125%;font-weight:900;letter-spacing:-.02em;text-decoration:none;font-size:20px;line-height:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:999px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-fg);font:700 15px var(--font);text-decoration:none;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--fg)}
+.btn.ghost:hover{background:var(--fg);color:var(--bg)}
+
+.hero{display:grid;gap:24px;padding-block:32px 48px}
+.hero h1{font-stretch:125%;font-weight:900;letter-spacing:-.04em;font-size:clamp(3.4rem,16vw,9.5rem);line-height:.92}
+.hero p{max-width:34ch;margin:0;color:var(--muted);font-size:18px}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px}
+.shot{position:relative;background:var(--tile);overflow:hidden;aspect-ratio:4/5;display:grid;place-items:end start;border-radius:14px}
+.shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.8,.2,1),filter .6s ease}
+.shot .slot{padding:12px;font-size:13px;color:var(--muted);position:relative;z-index:1}
+.shot--hover:hover img{transform:scale(1.05)}
+.shot--hover::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.28),transparent 55%);opacity:0;transition:opacity .45s ease;pointer-events:none}
+.shot--hover:hover::after{opacity:1}
+@media(min-width:760px){.hero{grid-template-columns:1.1fr .9fr;align-items:end;padding-block:48px 72px}}
+
+section{padding-block:48px;border-top:1px solid var(--line)}
+section>.wrap>h2{font-stretch:125%;font-weight:900;letter-spacing:-.025em;font-size:clamp(2rem,6.5vw,3.4rem);line-height:1;margin-bottom:10px}
+.lede{color:var(--muted);margin:0 0 28px;max-width:52ch}
+
+/* Story */
+.story p{max-width:60ch;margin:0;color:var(--muted);font-size:17px;line-height:1.65}
+.story p+p{margin-top:12px}
+
+.worn{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(min-width:760px){.worn{grid-template-columns:repeat(4,1fr)}}
+
+.pieces{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 12px}
+@media(min-width:760px){.pieces{grid-template-columns:repeat(4,1fr);gap:32px 16px}}
+.piece h3{font-size:16px;font-weight:700;font-stretch:100%;margin:10px 0 2px;line-height:1.25}
+.piece .meta{margin:0;font-size:14px;color:var(--muted)}
+.piece .price{font-weight:700;font-variant-numeric:tabular-nums;color:var(--fg)}
+.piece button{margin-top:10px;min-height:44px;width:100%;border:2px solid var(--fg);background:transparent;color:var(--fg);border-radius:999px;font:700 14px var(--font);cursor:pointer;transition:background .2s ease,color .2s ease}
+.piece button:hover{background:var(--fg);color:var(--bg)}
+
+form{display:grid;gap:16px;max-width:560px}
+label{display:grid;gap:6px;font-weight:600;font-size:15px}
+input,select,textarea{font:400 16px var(--font);color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:12px;min-height:48px;width:100%}
+textarea{min-height:88px;resize:vertical}
+.row{display:grid;gap:16px}
+@media(min-width:560px){.row{grid-template-columns:1fr 1fr}}
+.result{margin-top:24px;max-width:560px;border:2px solid var(--fg);border-radius:12px;padding:16px;display:grid;gap:12px}
+.result pre{margin:0;white-space:pre-wrap;word-break:break-word;font:400 15px/1.5 var(--font)}
+.result .acts{display:flex;flex-wrap:wrap;gap:10px}
+.note{font-size:14px;color:var(--muted);margin:0}
+.err{color:var(--fg);font-weight:600;font-size:14px;margin:0}
+
+.stock{display:grid;gap:16px;grid-template-columns:1fr}
+@media(min-width:560px){.stock{grid-template-columns:1fr 1fr}}
+.stock div{border-top:2px solid var(--fg);padding-top:12px}
+.stock h3{font-size:20px;font-weight:700;font-stretch:100%}
+.stock p{margin:4px 0 0;color:var(--muted)}
+footer{padding-block:32px 48px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+[hidden]{display:none!important}
+
+/* ---------- 360 spinner ---------- */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.spin360{position:relative;aspect-ratio:4/5;background:var(--tile);border-radius:14px;overflow:hidden;cursor:grab;touch-action:pan-y;user-select:none;-webkit-tap-highlight-color:transparent;opacity:0;transform:translateY(12px) scale(.98);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1);outline-offset:4px}
+.spin360.is-visible{opacity:1;transform:none}
+.spin360.is-active{cursor:grabbing}
+.spin360:focus-visible{outline:3px solid var(--focus)}
+.spin360__stage{position:absolute;inset:0;overflow:hidden}
+.spin360__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none;transition:transform .5s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.spin360.is-zoomed .spin360__img{transition:none}
+.spin360__loader{position:absolute;inset:0;display:grid;place-items:center;background:var(--tile);transition:opacity .5s ease,visibility .5s}
+.spin360.is-ready .spin360__loader{opacity:0;visibility:hidden;pointer-events:none}
+.spin360__ring{width:44px;height:44px;transform:rotate(-90deg)}
+.spin360__track{fill:none;stroke:var(--line);stroke-width:2.5}
+.spin360__prog{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-linecap:round;stroke-dasharray:94.2;stroke-dashoffset:94.2;transition:stroke-dashoffset .35s ease}
+.spin360__ui{position:absolute;inset:0;display:flex;justify-content:space-between;align-items:flex-end;padding:14px;pointer-events:none}
+.spin360__hint,.spin360__counter{padding:6px 12px;border-radius:999px;background:color-mix(in srgb,var(--fg) 72%,transparent);color:var(--bg);font:600 12px var(--font);letter-spacing:.02em;backdrop-filter:blur(6px);opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s ease}
+.spin360__hint{animation:hintPulse 2.4s ease-in-out infinite}
+.spin360__counter{font-variant-numeric:tabular-nums}
+.spin360__counter-n{display:inline-block;min-width:1.6ch;text-align:right}
+@keyframes hintPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.spin360:hover .spin360__hint,.spin360:hover .spin360__counter,.spin360:focus-visible .spin360__hint,.spin360:focus-visible .spin360__counter,.spin360.is-active .spin360__hint,.spin360.is-active .spin360__counter{opacity:1;transform:translateY(0)}
+.spin360.is-dragged .spin360__hint{opacity:0;transform:translateY(6px);animation:none}
+@media (prefers-reduced-motion:reduce){
+  .spin360{cursor:default;opacity:1;transform:none;transition:none}
+  .spin360__hint{display:none}
+  .spin360__img{transition:none}
+  .spin360__ui{opacity:1}
+  .spin360__counter{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#order">Skip to order</a>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="#top">Easy Chanaa</a>
+    <a class="btn" id="hdrWa" href="#order">Order on WhatsApp</a>
+  </header>
+</div>
+
+<main id="top">
+  <div class="wrap">
+    <div class="hero">
+      <div style="display:grid;gap:24px">
+        <h1>Easy Chanaa</h1>
+        <p id="tagline">Clothing you can see on people before you buy it.</p>
+        <div class="cta">
+          <a class="btn" href="#order">Order a piece</a>
+          <a class="btn ghost" href="#pieces">See the pieces</a>
+        </div>
+      </div>
+      <div class="shot" id="heroShot"><span class="slot">Hero photo goes here</span></div>
+    </div>
+  </div>
+
+  <section id="worn" aria-labelledby="wornH">
+    <div class="wrap">
+      <h2 id="wornH" class="reveal">Worn</h2>
+      <p class="lede reveal">Real people in the pieces. No studio, no filters.</p>
+      <div class="worn" id="wornGrid"></div>
+    </div>
+  </section>
+
+  <section id="story" aria-labelledby="storyH" hidden>
+    <div class="wrap">
+      <h2 id="storyH" class="reveal">Story</h2>
+      <div class="story reveal" id="storyBody"></div>
+    </div>
+  </section>
+
+  <section id="pieces" aria-labelledby="piecesH">
+    <div class="wrap">
+      <h2 id="piecesH" class="reveal">The pieces</h2>
+      <p class="lede reveal">Tap Add to order and the form below fills in the item.</p>
+      <div class="pieces" id="pieceGrid"></div>
+    </div>
+  </section>
+
+  <section id="order" aria-labelledby="orderH">
+    <div class="wrap">
+      <h2 id="orderH" class="reveal">Order</h2>
+      <p class="lede reveal">Fill this in and we build your WhatsApp message. You send it, we reply with availability and how to pay.</p>
+      <form id="orderForm" novalidate>
+        <label>Item
+          <select id="fItem" name="item" required></select>
+        </label>
+        <div class="row">
+          <label>Size
+            <select id="fSize" name="size" required></select>
+          </label>
+          <label>Quantity
+            <input id="fQty" name="qty" type="number" min="1" max="20" value="1" inputmode="numeric">
+          </label>
+        </div>
+        <label>Your name
+          <input id="fName" name="name" type="text" autocomplete="name" required>
+        </label>
+        <label>Area or city
+          <input id="fArea" name="area" type="text" autocomplete="address-level2" required>
+        </label>
+        <label>Note (optional)
+          <textarea id="fNote" name="note"></textarea>
+        </label>
+        <p class="err" id="formErr" role="alert" hidden></p>
+        <button class="btn" type="submit">Build my WhatsApp message</button>
+      </form>
+
+      <div class="result" id="result" hidden aria-live="polite">
+        <pre id="msgText"></pre>
+        <div class="acts">
+          <a class="btn" id="waGo" href="#order" target="_blank" rel="noopener">Open WhatsApp</a>
+          <button class="btn ghost" type="button" id="copyBtn">Copy message</button>
+        </div>
+        <p class="note" id="waNote"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="stockists" aria-labelledby="stockH">
+    <div class="wrap">
+      <h2 id="stockH" class="reveal">Find us in store</h2>
+      <p class="lede reveal">Two shops carry Easy Chanaa right now.</p>
+      <div class="stock" id="stockGrid"></div>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Easy Chanaa</span>
+    <span id="foot"></span>
+  </footer>
+</div>
+
+<script>
+/* ===== CONFIG: edit only this block ===== */
+const CONFIG = {
+  whatsapp: "27726777608",
+  handle: "@easychanaa",
+  currency: "R",
+  sizes: ["S","M","L","XL"],
+  hero: "",
+  story: [],                    // array of paragraphs. Empty = section hidden.
+  worn: [],
+  pieces: [
+    // Add spin:{frames:"frames/ec-001/", count:36, ext:"webp", pad:2} to any piece that has a 360 sequence.
+    // Optional: prefix, start, sizes (comma list, e.g. "640,1024,1600").
+    {sku:"EC-001", name:"Piece 1", detail:"Add fabric and fit", price:null, img:""},
+    {sku:"EC-002", name:"Piece 2", detail:"Add fabric and fit", price:null, img:""},
+    {sku:"EC-003", name:"Piece 3", detail:"Add fabric and fit", price:null, img:""},
+    {sku:"EC-004", name:"Piece 4", detail:"Add fabric and fit", price:null, img:""}
+  ],
+  stockists: [
+    {name:"Shop one (add name)", area:"Small Street, Klerksdorp, next to Sportscene, opposite Klerksdorp Park"},
+    {name:"Shop two", area:"Add area"}
+  ]
+};
+/* ======================================= */
+
+const $ = id => document.getElementById(id);
+const el = (t, props, kids) => { const n = document.createElement(t); Object.assign(n, props||{}); (kids||[]).forEach(k => n.append(k)); return n; };
+const priceText = p => p == null ? "Ask for price" : CONFIG.currency + p.toLocaleString("en-ZA");
+const waNum = (CONFIG.whatsapp||"").replace(/\D/g,"");
+
+function shot(src, alt, label){
+  const d = el("div",{className:"shot shot--hover"});
+  if(src){ d.append(el("img",{src, alt:alt||"", loading:"lazy", decoding:"async"})); }
+  else { d.append(el("span",{className:"slot",textContent:label})); }
+  return d;
+}
+
+function spin(cfg, alt){
+  const root = el("div",{className:"spin360", tabIndex:0, role:"img"});
+  root.dataset.frames = cfg.frames || "";
+  root.dataset.count  = String(cfg.count || 36);
+  root.dataset.ext    = cfg.ext || "webp";
+  root.dataset.pad    = String(cfg.pad || 2);
+  if(cfg.prefix) root.dataset.prefix = cfg.prefix;
+  if(cfg.start != null) root.dataset.start = String(cfg.start);
+  if(cfg.sizes) root.dataset.sizes = cfg.sizes;
+  root.dataset.label = cfg.label || alt || "Product";
+  root.setAttribute("aria-label", root.dataset.label);
+
+  const stage = el("div",{className:"spin360__stage"});
+  stage.append(el("img",{className:"spin360__img", alt:"", draggable:false, decoding:"async"}));
+  root.append(stage);
+
+  const loader = el("div",{className:"spin360__loader","aria-hidden":"true"});
+  loader.innerHTML = '<svg viewBox="0 0 36 36" class="spin360__ring"><circle cx="18" cy="18" r="15" class="spin360__track"/><circle cx="18" cy="18" r="15" class="spin360__prog"/></svg>';
+  root.append(loader);
+
+  const ui = el("div",{className:"spin360__ui","aria-hidden":"true"});
+  ui.append(el("span",{className:"spin360__hint",textContent:"Drag to rotate"}));
+  const counter = el("span",{className:"spin360__counter"});
+  counter.append(el("span",{className:"spin360__counter-n",textContent:"1"}));
+  counter.append(document.createTextNode("/"));
+  counter.append(el("span",{className:"spin360__counter-t",textContent:String(cfg.count||36)}));
+  ui.append(counter);
+  root.append(ui);
+
+  root.append(el("span",{className:"sr-only spin360__live","aria-live":"polite"}));
+  return root;
+}
+
+if(CONFIG.hero){ const h=$("heroShot"); h.replaceChildren(el("img",{src:CONFIG.hero,alt:"Easy Chanaa piece being worn",fetchPriority:"high"})); }
+
+if(Array.isArray(CONFIG.story) && CONFIG.story.length){
+  $("story").hidden = false;
+  CONFIG.story.forEach(t => $("storyBody").append(el("p",{textContent:t})));
+}
+
+const wornN = Math.max(CONFIG.worn.length, 4);
+for(let i=0;i<wornN;i++){
+  const w = CONFIG.worn[i];
+  $("wornGrid").append(shot(w&&w.src, w&&w.alt, "Worn photo "+(i+1)));
+}
+
+CONFIG.pieces.forEach(p=>{
+  const art = el("article",{className:"piece"});
+  art.append(p.spin ? spin(p.spin, p.name) : shot(p.img, p.name, p.sku));
+  art.append(el("h3",{textContent:p.name}));
+  art.append(el("p",{className:"meta",textContent:p.detail}));
+  art.append(el("p",{className:"meta price",textContent:priceText(p.price)}));
+  const b = el("button",{type:"button",textContent:"Add to order"});
+  b.addEventListener("click",()=>{ $("fItem").value = p.sku; $("order").scrollIntoView({behavior:"smooth"}); $("fSize").focus({preventScroll:true}); });
+  art.append(b);
+  $("pieceGrid").append(art);
+  $("fItem").append(el("option",{value:p.sku,textContent:p.name+" ("+p.sku+")"}));
+});
+CONFIG.sizes.forEach(s=>$("fSize").append(el("option",{value:s,textContent:s})));
+
+CONFIG.stockists.forEach(s=>{
+  $("stockGrid").append(el("div",{},[el("h3",{textContent:s.name}),el("p",{textContent:s.area})]));
+});
+$("foot").textContent = CONFIG.handle || "";
+
+function buildMsg(){
+  const piece = CONFIG.pieces.find(p=>p.sku===$("fItem").value);
+  const qty = Math.max(1, parseInt($("fQty").value,10)||1);
+  const lines = [
+    "Hi Easy Chanaa, I'd like to order:",
+    qty+" x "+piece.name+" ("+piece.sku+"), size "+$("fSize").value,
+    "Name: "+$("fName").value.trim(),
+    "Area: "+$("fArea").value.trim()
+  ];
+  const note = $("fNote").value.trim();
+  if(note) lines.push("Note: "+note);
+  return lines.join("\n");
+}
+
+$("orderForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const err = $("formErr");
+  if(!$("fName").value.trim() || !$("fArea").value.trim()){
+    err.textContent = "Add your name and area so we can reply.";
+    err.hidden = false; return;
+  }
+  err.hidden = true;
+  const msg = buildMsg();
+  $("msgText").textContent = msg;
+  const go = $("waGo");
+  if(waNum){ go.href = "https://wa.me/"+waNum+"?text="+encodeURIComponent(msg); go.hidden=false; $("waNote").textContent="Tap Open WhatsApp, then press send. Your order is not placed until you send it."; }
+  else { go.hidden = true; $("waNote").textContent="WhatsApp number not set yet. Copy the message and send it to us."; }
+  $("result").hidden = false;
+  $("result").scrollIntoView({behavior:"smooth",block:"nearest"});
+});
+
+$("copyBtn").addEventListener("click", async ()=>{
+  const t = $("msgText").textContent, b = $("copyBtn");
+  try{ await navigator.clipboard.writeText(t); b.textContent="Copied"; }
+  catch(_){ const r=document.createRange(); r.selectNodeContents($("msgText")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent="Selected, press copy"; }
+  setTimeout(()=>b.textContent="Copy message",2000);
+});
+
+if(waNum){ $("hdrWa").href="https://wa.me/"+waNum; $("hdrWa").target="_blank"; $("hdrWa").rel="noopener"; }
+
+/* ===== Reveal on scroll ===== */
+(()=>{
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const nodes = document.querySelectorAll(".reveal");
+  if(reduce || !("IntersectionObserver" in window)){ nodes.forEach(n=>n.classList.add("is-visible")); return; }
+  const io = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("is-visible"); io.unobserve(e.target); } });
+  },{rootMargin:"0px 0px -8% 0px",threshold:.08});
+  nodes.forEach(n=>io.observe(n));
+})();
+
+/* ===== 360 spinner ===== */
+(() => {
+  const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  document.querySelectorAll(".spin360").forEach(root => {
+    const dir     = root.dataset.frames || "";
+    const prefix  = root.dataset.prefix || "";
+    const start   = root.dataset.start != null ? parseInt(root.dataset.start,10) : 1;
+    const count   = Math.max(2, parseInt(root.dataset.count, 10) || 36);
+    const ext     = root.dataset.ext || "webp";
+    const padTo   = parseInt(root.dataset.pad, 10) || 2;
+    const label   = root.dataset.label || "Product";
+    const sizes   = (root.dataset.sizes || "").split(",").map(n=>parseInt(n.trim(),10)).filter(Boolean);
+
+    const img     = root.querySelector(".spin360__img");
+    const prog    = root.querySelector(".spin360__prog");
+    const counter = root.querySelector(".spin360__counter-n");
+    const live    = root.querySelector(".spin360__live");
+    const counterT= root.querySelector(".spin360__counter-t");
+    counterT.textContent = count;
+
+    const numName = i => String(start + i).padStart(padTo, "0");
+    const frameUrl = (i, size) => sizes.length
+      ? `${dir}${prefix}${numName(i)}-${size}.${ext}`
+      : `${dir}${prefix}${numName(i)}.${ext}`;
+
+    const pickSize = () => {
+      if(!sizes.length) return null;
+      const w = root.clientWidth * (window.devicePixelRatio || 1);
+      return sizes.find(s => s >= w) || sizes[sizes.length - 1];
+    };
+
+    let size = pickSize();
+    const frames = new Array(count);
+
+    const loadFrame = (i) => new Promise(resolve => {
+      if(frames[i] && frames[i].complete) return resolve();
+      const im = new Image();
+      im.decoding = "async";
+      im.onload = im.onerror = () => resolve();
+      im.src = frameUrl(i, size);
+      frames[i] = im;
+    });
+
+    let ready = false;
+    const C = 2 * Math.PI * 15;
+    const setProgress = p => { prog.style.strokeDashoffset = String(C * (1 - Math.min(1, p))); };
+
+    const preloadFirst = async () => {
+      await loadFrame(0);
+      img.src = frames[0].src;
+      root.classList.add("is-ready");
+      ready = true;
+      setProgress(1);
+
+      const order = [];
+      for(let step = 1; step <= Math.ceil(count/2); step++){
+        order.push(step);
+        if(step !== count - step) order.push(count - step);
+      }
+      for(const i of order){
+        if(i >= count) continue;
+        await loadFrame(i);
+      }
+    };
+
+    let p = 0;
+    const progTick = setInterval(() => {
+      p = Math.min(0.9, p + 0.05 + Math.random() * 0.04);
+      setProgress(p);
+      if(ready) clearInterval(progTick);
+    }, 180);
+
+    preloadFirst();
+
+    let idx = 0;
+    let pendingIdx = 0;
+    let rafId = 0;
+
+    const paint = () => {
+      rafId = 0;
+      if(idx === pendingIdx) return;
+      idx = pendingIdx;
+      const f = frames[idx];
+      if(f && f.complete){ img.src = f.src; counter.textContent = String(idx + 1); announce(); }
+      else { loadFrame(idx).then(()=>{ if(pendingIdx === idx){ img.src = frames[idx].src; counter.textContent = String(idx + 1); announce(); } }); }
+    };
+    const requestPaint = () => { if(!rafId) rafId = requestAnimationFrame(paint); };
+    const setIdx = v => { pendingIdx = ((v % count) + count) % count; requestPaint(); };
+
+    let liveT = 0;
+    const announce = () => {
+      const now = performance.now();
+      if(now - liveT < 400) return;
+      liveT = now;
+      live.textContent = `${label}, frame ${idx + 1} of ${count}`;
+    };
+
+    const sensitivity = 8;
+    const friction = 0.94;
+    const minVel = 0.05;
+
+    let dragging = false;
+    let lastX = 0;
+    let lastT = 0;
+    let velocity = 0;
+    let momentumRaf = 0;
+    let accumulated = 0;
+
+    const stopMomentum = () => {
+      if(momentumRaf) cancelAnimationFrame(momentumRaf);
+      momentumRaf = 0;
+      velocity = 0;
+    };
+
+    const momentumStep = (t) => {
+      if(Math.abs(velocity) < minVel){ stopMomentum(); return; }
+      const dt = Math.min(48, t - (momentumStep._t || t));
+      momentumStep._t = t;
+      accumulated += velocity * dt;
+      const whole = Math.trunc(accumulated);
+      if(whole){ accumulated -= whole; setIdx(pendingIdx + whole); }
+      velocity *= Math.pow(friction, dt / 16);
+      momentumRaf = requestAnimationFrame(momentumStep);
+    };
+
+    root.addEventListener("pointerdown", e => {
+      if(e.pointerType === "mouse" && e.button !== 0) return;
+      stopMomentum();
+      dragging = true; lastX = e.clientX; lastT = performance.now();
+      velocity = 0; accumulated = 0;
+      root.classList.add("is-active","is-dragged");
+      try{ root.setPointerCapture(e.pointerId); }catch{}
+    });
+
+    root.addEventListener("pointermove", e => {
+      if(!dragging) return;
+      const now = performance.now();
+      const dx = e.clientX - lastX;
+      const dt = Math.max(1, now - lastT);
+      lastX = e.clientX; lastT = now;
+      accumulated += dx / sensitivity;
+      const whole = Math.trunc(accumulated);
+      if(whole){ accumulated -= whole; setIdx(pendingIdx + whole); }
+      velocity = (dx / sensitivity) / dt;
+    });
+
+    const endDrag = e => {
+      if(!dragging) return;
+      dragging = false;
+      try{ root.releasePointerCapture(e.pointerId); }catch{}
+      if(!REDUCED && Math.abs(velocity) > minVel){
+        momentumStep._t = performance.now();
+        momentumRaf = requestAnimationFrame(momentumStep);
+      }
+    };
+    root.addEventListener("pointerup", endDrag);
+    root.addEventListener("pointercancel", endDrag);
+    root.addEventListener("pointerleave", endDrag);
+
+    root.addEventListener("keydown", e => {
+      const k = e.key;
+      const right = k === "ArrowRight" || k === "ArrowDown";
+      const left  = k === "ArrowLeft"  || k === "ArrowUp";
+      const home  = k === "Home";
+      const endK  = k === "End";
+      const plus  = k === "+" || k === "=";
+      const minus = k === "-" || k === "_";
+      if(plus || minus){ e.preventDefault(); toggleZoom(plus ? 1.6 : 1); return; }
+      if(!right && !left && !home && !endK) return;
+      e.preventDefault();
+      root.classList.add("is-active");
+      stopMomentum();
+      if(home) setIdx(0);
+      else if(endK) setIdx(count - 1);
+      else setIdx(pendingIdx + (right ? 1 : -1));
+    });
+
+    /* zoom: double-click / double-tap, +/- keys */
+    let zoom = 1;
+    function toggleZoom(z){
+      zoom = (z === undefined) ? (zoom > 1 ? 1 : 1.6) : z;
+      root.classList.toggle("is-zoomed", zoom > 1);
+      img.style.transform = zoom > 1 ? "scale(" + zoom + ")" : "";
+    }
+    root.addEventListener("dblclick", () => toggleZoom());
+
+    /* reveal when scrolled into view */
+    if("IntersectionObserver" in window && !REDUCED){
+      const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ root.classList.add("is-visible"); io.unobserve(root); } }), {threshold:.1});
+      io.observe(root);
+    } else { root.classList.add("is-visible"); }
+  });
+})();
+</script>
+</body>
+</html>
