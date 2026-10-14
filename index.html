@@ -44,7 +44,7 @@ a{color:inherit}
 }
 
 header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);z-index:5}
-.mark{display:inline-block;text-decoration:none;font-size:26px;line-height:.82;letter-spacing:.025em;transform:scaleX(.94);transform-origin:left center}
+.mark{display:inline-flex;align-items:center;text-decoration:none;line-height:0}.mark img{display:block;width:clamp(132px,18vw,190px);height:auto}.brand-wordmark{display:block;width:min(100%,720px);height:auto}.brand-wordmark-wrap{display:block;width:min(100%,720px);line-height:0}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:999px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-fg);font:700 15px var(--font);text-decoration:none;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease}
 .btn:hover{transform:translateY(-1px)}
 .btn.ghost{background:transparent;color:var(--fg);border-color:var(--fg)}
@@ -137,7 +137,7 @@ footer{padding-block:32px 48px;border-top:1px solid var(--line);color:var(--mute
 <a class="skip" href="#order">Skip to order</a>
 <div class="wrap">
   <header class="top">
-    <a class="mark" href="#top">Easy Chanaa</a>
+    <a class="mark" href="#top"><img src="Designs%20%26%20Shxt/03-easy-chanaa-wordmark-cropped.png" alt="Easy Chanaa"></a>
     <a class="btn" id="hdrWa" href="#order">Order on WhatsApp</a>
   </header>
 </div>
@@ -146,7 +146,7 @@ footer{padding-block:32px 48px;border-top:1px solid var(--line);color:var(--mute
   <div class="wrap">
     <div class="hero">
       <div style="display:grid;gap:24px">
-        <h1>Easy Chanaa</h1>
+        <h1 class="brand-wordmark-wrap"><img class="brand-wordmark" src="Designs%20%26%20Shxt/03-easy-chanaa-wordmark-cropped.png" alt="Easy Chanaa"></h1>
         <p id="tagline">Clothing you can see on people before you buy it.</p>
         <div class="cta">
           <a class="btn" href="#order">Order a piece</a>
