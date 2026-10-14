@@ -7,12 +7,13 @@
 <meta name="description" content="Easy Chanaa clothing. See the pieces worn, then order on WhatsApp.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Bebas+Neue&display=swap">
 <style>
 :root{
   --bg:#EDEFEA; --fg:#14201B; --muted:#55615B; --line:#CBD1CA; --tile:#DDE2DB;
   --accent:#2438C8; --accent-fg:#FFFFFF; --focus:#2438C8;
   --font:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --display:"Bebas Neue","Arial Narrow","Roboto Condensed",Impact,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --bg:#101612; --fg:#E9EEE8; --muted:#A3AFA8; --line:#2B3630; --tile:#1B2420;
@@ -30,8 +31,9 @@ a{color:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 .skip{position:absolute;left:-999px}.skip:focus{left:16px;top:8px;background:var(--bg);padding:8px;z-index:9}
 
-/* Display type — Archivo Expanded */
-.display{font-stretch:125%;letter-spacing:-.03em;font-weight:900;line-height:.98}
+/* Display type — condensed block lettering inspired by the Easy Chanaa watermark */
+.display,.mark,h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:.015em;text-transform:uppercase;line-height:.9}
+.display{font-size:1.05em}
 
 /* Scroll reveal */
 .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
@@ -42,14 +44,14 @@ a{color:inherit}
 }
 
 header.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-block:14px;border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);z-index:5}
-.mark{font-stretch:125%;font-weight:900;letter-spacing:-.02em;text-decoration:none;font-size:20px;line-height:1}
+.mark{display:inline-flex;align-items:center;text-decoration:none;line-height:0}.mark img{display:block;width:clamp(132px,18vw,190px);height:auto}.brand-wordmark{display:block;width:min(100%,720px);height:auto}.brand-wordmark-wrap{display:block;width:min(100%,720px);line-height:0}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 20px;border-radius:999px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-fg);font:700 15px var(--font);text-decoration:none;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease}
 .btn:hover{transform:translateY(-1px)}
 .btn.ghost{background:transparent;color:var(--fg);border-color:var(--fg)}
 .btn.ghost:hover{background:var(--fg);color:var(--bg)}
 
 .hero{display:grid;gap:24px;padding-block:32px 48px}
-.hero h1{font-stretch:125%;font-weight:900;letter-spacing:-.04em;font-size:clamp(3.4rem,16vw,9.5rem);line-height:.92}
+.hero h1{font-size:clamp(4rem,17vw,10.5rem);letter-spacing:.01em;line-height:.78;max-width:7ch}
 .hero p{max-width:34ch;margin:0;color:var(--muted);font-size:18px}
 .hero .cta{display:flex;flex-wrap:wrap;gap:12px}
 .shot{position:relative;background:var(--tile);overflow:hidden;aspect-ratio:4/5;display:grid;place-items:end start;border-radius:14px}
@@ -61,7 +63,7 @@ header.top{display:flex;justify-content:space-between;align-items:center;gap:12p
 @media(min-width:760px){.hero{grid-template-columns:1.1fr .9fr;align-items:end;padding-block:48px 72px}}
 
 section{padding-block:48px;border-top:1px solid var(--line)}
-section>.wrap>h2{font-stretch:125%;font-weight:900;letter-spacing:-.025em;font-size:clamp(2rem,6.5vw,3.4rem);line-height:1;margin-bottom:10px}
+section>.wrap>h2{font-size:clamp(2.5rem,7vw,4.2rem);letter-spacing:.02em;line-height:.84;margin-bottom:12px}
 .lede{color:var(--muted);margin:0 0 28px;max-width:52ch}
 
 /* Story */
@@ -73,7 +75,7 @@ section>.wrap>h2{font-stretch:125%;font-weight:900;letter-spacing:-.025em;font-s
 
 .pieces{display:grid;grid-template-columns:repeat(2,1fr);gap:24px 12px}
 @media(min-width:760px){.pieces{grid-template-columns:repeat(4,1fr);gap:32px 16px}}
-.piece h3{font-size:16px;font-weight:700;font-stretch:100%;margin:10px 0 2px;line-height:1.25}
+.piece h3{font-size:21px;letter-spacing:.02em;margin:10px 0 2px;line-height:.92}
 .piece .meta{margin:0;font-size:14px;color:var(--muted)}
 .piece .price{font-weight:700;font-variant-numeric:tabular-nums;color:var(--fg)}
 .piece button{margin-top:10px;min-height:44px;width:100%;border:2px solid var(--fg);background:transparent;color:var(--fg);border-radius:999px;font:700 14px var(--font);cursor:pointer;transition:background .2s ease,color .2s ease}
@@ -94,7 +96,7 @@ textarea{min-height:88px;resize:vertical}
 .stock{display:grid;gap:16px;grid-template-columns:1fr}
 @media(min-width:560px){.stock{grid-template-columns:1fr 1fr}}
 .stock div{border-top:2px solid var(--fg);padding-top:12px}
-.stock h3{font-size:20px;font-weight:700;font-stretch:100%}
+.stock h3{font-size:25px;letter-spacing:.02em}
 .stock p{margin:4px 0 0;color:var(--muted)}
 footer{padding-block:32px 48px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
 [hidden]{display:none!important}
@@ -135,7 +137,7 @@ footer{padding-block:32px 48px;border-top:1px solid var(--line);color:var(--mute
 <a class="skip" href="#order">Skip to order</a>
 <div class="wrap">
   <header class="top">
-    <a class="mark" href="#top">Easy Chanaa</a>
+    <a class="mark" href="#top"><img src="Designs%20%26%20Shxt/03-easy-chanaa-wordmark-cropped.png" alt="Easy Chanaa"></a>
     <a class="btn" id="hdrWa" href="#order">Order on WhatsApp</a>
   </header>
 </div>
@@ -144,7 +146,7 @@ footer{padding-block:32px 48px;border-top:1px solid var(--line);color:var(--mute
   <div class="wrap">
     <div class="hero">
       <div style="display:grid;gap:24px">
-        <h1>Easy Chanaa</h1>
+        <h1 class="brand-wordmark-wrap"><img class="brand-wordmark" src="Designs%20%26%20Shxt/03-easy-chanaa-wordmark-cropped.png" alt="Easy Chanaa"></h1>
         <p id="tagline">Clothing you can see on people before you buy it.</p>
         <div class="cta">
           <a class="btn" href="#order">Order a piece</a>
