@@ -1,0 +1,3 @@
+footer.socials{padding-block:40px 56px;border-top:1px solid var(--line);text-align:center}
+footer.socials h2{font-size:clamp(2rem,6vw,3rem);margin-bottom:20px}
+.socials__links{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
