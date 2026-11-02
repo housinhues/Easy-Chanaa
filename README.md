@@ -1,5 +1,12 @@
 # Easy Chanaa
 
-Single-file website. Edit the `CONFIG` block at the top of the script in `index.html` (WhatsApp number, pieces, prices, photos, shops). Images live in `assets/`. Pushing to `main` publishes to GitHub Pages.
+A mobile-first, static landing page for Easy Chanaa, published on GitHub Pages. The page features existing Easy Chanaa shorts photography and directs product questions to WhatsApp.
 
-Set a price with `price: 350` (blank/`null` shows "Ask for price").
+## Update the site
+
+- `index.html` contains the page structure, brand copy, sharing metadata and direct contact links.
+- `css/styles.css` contains the responsive design system.
+- `js/products.js` contains the featured item, photo gallery and WhatsApp contact number. Keep price as `Price on request` until a confirmed amount is supplied.
+- Original brand and product imagery is retained in the repository; optimized `.webp` copies are used on the landing page for faster loading.
+
+The public site is <https://housinhues.github.io/Easy-Chanaa/>.

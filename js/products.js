@@ -1,9 +1,19 @@
-// Easy Chanaa product data.
-// Leave the array empty to show placeholder cards.
-// Each product:
-// { id: 'shorts-01', name: 'Name', price: 'R000', photos: ['photo1.jpg', 'photo2.jpg'], model: '' }
-// `model` is optional: path to a 3D file (e.g. .glb) for the future 3D preview.
-
+// Verified featured item: Easy Chanaa shorts. Price is not published; ask directly.
 export const WHATSAPP = '27726777608';
 
-export const products = [];
+export const products = [
+  {
+    id: 'easy-chanaa-shorts',
+    name: 'Easy Chanaa Shorts',
+    price: 'Price on request',
+    photos: [
+      'easy-chanaa-shorts-grade-06-watermarked.webp',
+      'easy-chanaa-shorts-closeup-12.webp',
+      'easy-chanaa-shorts-focus-08.webp',
+      'easy-chanaa-shorts-focus-09.webp',
+      'easy-chanaa-floating-front-watermarked.webp',
+      'easy-chanaa-floating-detail-watermarked.webp'
+    ],
+    model: ''
+  }
+];
